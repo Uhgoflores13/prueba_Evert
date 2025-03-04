@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "programaEjecutar")
-public class programaEjecutar {
+public class Parametro {
 
 
     @Id
@@ -15,18 +15,25 @@ public class programaEjecutar {
     private Long id;
 
     @Column(nullable = false)
-    private String nombre;
+    private String opcion;
+
+    @ManyToOne
+    @JoinColumn(name = "comando_id") 
+    private comandoPrincipal ComandoPrincipal;
 
      @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
-    public programaEjecutar() {
+    public Parametro() {
     }
 
-    public programaEjecutar(Long id, String nombre) {
+    public Parametro(Long id, String opcion, comandoPrincipal ComandoPrincipal) {
         this.id = id;
-        this.nombre = nombre;
+        this.opcion = opcion;
+        this.ComandoPrincipal = ComandoPrincipal;
     }
+
+
 
     public Long getId() {
         return id;
@@ -37,11 +44,27 @@ public class programaEjecutar {
     }
 
     public String getNombre() {
-        return nombre;
+        return opcion;
+    }
+
+    public String getOpcion() {
+        return opcion;
+    }
+
+    public void setOpcion(String opcion) {
+        this.opcion = opcion;
+    }
+
+    public comandoPrincipal getComandoPrincipal() {
+        return ComandoPrincipal;
+    }
+
+    public void setComandoPrincipal(comandoPrincipal comandoPrincipal) {
+        ComandoPrincipal = comandoPrincipal;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.opcion = nombre;
     }
 
     public LocalDateTime getCreatedAt() {
